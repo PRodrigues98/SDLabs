@@ -38,8 +38,10 @@ public class Game {
 					playAccepted = ttt.play(--play / 3, play % 3, player);
 					if (!playAccepted)
 						System.out.println("Invalid play! Try again.");
-				} else
+				} else{
+					System.out.println("You tried to clean the board!");
 					playAccepted = false;
+				}
 			} while (!playAccepted);
 			winner = ttt.checkWinner();
 		} while (winner == -1);

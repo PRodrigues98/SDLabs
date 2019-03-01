@@ -1,0 +1,45 @@
+//
+// Protocol buffers definition for TTT
+//
+syntax = "proto3";
+package ttt.grpc;
+
+
+message PlayRequest {
+
+  int32 row = 1;
+  int32 column = 2;
+  int32 player = 3;
+
+}
+
+message PlayResponse {
+  bool validPlay = 1;
+}
+
+message CheckWinnerRequest {
+  
+}
+
+message CheckWinnerResponse {
+  int32 currentResult = 1;
+}
+
+message CurrentBoardRequest {
+  
+}
+
+message CurrentBoardResponse {
+  string currentBoard = 1;
+}
+
+// Defining a Service, a Service can have multiple RPC operations
+service TTTService {
+  // Define a RPC operation
+  rpc play(PlayRequest) returns (PlayResponse);
+
+  rpc checkWinner(CheckWinnerRequest) returns (CheckWinnerResponse);
+
+  rpc currentBoard(CurrentBoardRequest) returns (CurrentBoardResponse);
+
+}
