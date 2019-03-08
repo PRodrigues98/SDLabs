@@ -6,6 +6,23 @@ public class TTTGame {
 			{ '4', '5', '6' }, /* used to select a vacant square for */
 			{ '7', '8', '9' } /* a turn. */
 	};
+
+	char initialBoard[][] = {
+			{ '1', '2', '3' }, /* Initial values are reference numbers */
+			{ '4', '5', '6' }, /* used to select a vacant square for */
+			{ '7', '8', '9' } /* a turn. */
+	};
+
+	int plays[][] = {{-1, -1},
+					 {-1, -1},
+					 {-1, -1},
+					 {-1, -1},
+					 {-1, -1},
+					 {-1, -1},
+					 {-1, -1},
+					 {-1, -1},
+					 {-1, -1}};
+
 	int nextPlayer = 0;
 	int numPlays = 0;
 
@@ -30,7 +47,12 @@ public class TTTGame {
 		board[row][column] = (player == 1) ? 'X'
 				: 'O'; /* Insert player symbol */
 		nextPlayer = (nextPlayer + 1) % 2;
+
+		this.plays[numPlays][0] = row;
+		this.plays[numPlays][1] = column;
+
 		numPlays++;
+
 		return true;
 	}
 
@@ -64,6 +86,33 @@ public class TTTGame {
 			return 2; /* A draw! */
 		else
 			return -1; /* Game is not over yet */
+	}
+
+	public int undoBoard() {
+
+		if(numPlays > 1){
+			this.board[this.plays[numPlays - 1][0]][this.plays[numPlays - 1][1]] = (char)('0' + this.plays[numPlays - 1][0] * 3 + (this.plays[numPlays - 1][1] + 1));
+				
+			this.plays[numPlays - 1][0] = -1;
+			this.plays[numPlays - 1][1] = -1;
+
+			numPlays--;
+
+			nextPlayer = (nextPlayer + 1) % 2;
+		}
+
+		if(numPlays >= 1){
+			this.board[this.plays[numPlays - 1][0]][this.plays[numPlays - 1][1]] = (char)('0' + this.plays[numPlays - 1][0] * 3 + (this.plays[numPlays - 1][1] + 1));
+			
+			this.plays[numPlays - 1][0] = -1;
+			this.plays[numPlays - 1][1] = -1;
+
+			numPlays--;
+
+			nextPlayer = (nextPlayer + 1) % 2;
+		}
+
+		return this.nextPlayer;
 	}
 
 }

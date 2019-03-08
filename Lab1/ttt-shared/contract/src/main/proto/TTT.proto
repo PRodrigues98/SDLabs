@@ -33,6 +33,15 @@ message CurrentBoardResponse {
   string currentBoard = 1;
 }
 
+message UndoBoardRequest {
+  
+}
+
+message UndoBoardResponse {
+  int32 nextPlayer = 1;
+}
+
+
 // Defining a Service, a Service can have multiple RPC operations
 service TTTService {
   // Define a RPC operation
@@ -41,5 +50,7 @@ service TTTService {
   rpc checkWinner(CheckWinnerRequest) returns (CheckWinnerResponse);
 
   rpc currentBoard(CurrentBoardRequest) returns (CurrentBoardResponse);
+
+  rpc undoBoard(UndoBoardRequest) returns (UndoBoardResponse);
 
 }

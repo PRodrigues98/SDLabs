@@ -30,4 +30,11 @@ public class TTTServiceImpl extends TTTServiceGrpc.TTTServiceImplBase {
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
 	}
+
+	@Override
+	public void undoBoard(TTT.UndoBoardRequest request, StreamObserver<TTT.UndoBoardResponse> responseObserver) {
+		TTT.UndoBoardResponse response = TTT.UndoBoardResponse.newBuilder().setNextPlayer(ttt.undoBoard()).build();
+		responseObserver.onNext(response);
+		responseObserver.onCompleted();
+	}
 }

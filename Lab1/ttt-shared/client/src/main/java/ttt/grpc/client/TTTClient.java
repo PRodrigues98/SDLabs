@@ -64,7 +64,7 @@ public class TTTClient {
 
 				play = game.readPlay(player);
 
-				if(play != 0){
+				if(play != 0 && play != 10){
 
 					TTT.PlayRequest.Builder requestPlay = TTT.PlayRequest.newBuilder();
 
@@ -82,11 +82,18 @@ public class TTTClient {
 					}
 
 				} 
-				else{
-					System.out.println("You tried to clean the board!");
+				else if(play == 10) {
+					TTT.UndoBoardRequest requestUndo = TTT.UndoBoardRequest.newBuilder().build();
+					TTT.UndoBoardResponse responseUndo = stub.undoBoard(requestUndo);
+
+					player = responseUndo.getNextPlayer();
 
 					playAccepted = false;
 				}
+				else{
+					playAccepted = false;
+				}
+
 
 			} while (!playAccepted);
 

@@ -14,10 +14,10 @@ public class Game {
 		do {
 			System.out.printf(
 					"\nPlayer %d, please enter the number of the square "
-							+ "where you want to place your %c (or 0 to refresh the board): \n",
+							+ "where you want to place your %c (or 0 to refresh the board, 10 to undo 2 plays): \n",
 					player, (player == 1) ? 'X' : 'O');
 			play = keyboardSc.nextInt();
-		} while (play > 9 || play < 0);
+		} while (play > 10 || play < 0);
 		return play;
 	}
 
