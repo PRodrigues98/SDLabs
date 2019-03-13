@@ -1,0 +1,9 @@
+A entrega foi completamente implementada.
+
+Instruções:
+	Ir à pasta "interface" e fazer o comando "mvn install";
+	Ir à pasta "server" e inicializar o server com o comando "mvn compile exec:java";
+	Abrir outro terminal e ir à pasta "client", correndo o comando "mvn compile exec:java";
+	Jogar o jogo! 
+
+Como poderá ver, o comando no jogo 201 irá fazer uma jogada random nos cantos se for possível, caso contrário irá fazer uma jogada em qualquer outra posição.

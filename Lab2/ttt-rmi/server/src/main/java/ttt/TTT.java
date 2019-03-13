@@ -2,6 +2,8 @@ package ttt;
 
 import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.*;
+import java.util.Random;
 
 /**
  * TTT - Tic Tac Toe.
@@ -76,6 +78,41 @@ public class TTT extends UnicastRemoteObject implements TTTService{
 		}
 		// unlock on return
 
+	}
+
+	public void JogaCantoAleatorio() throws RemoteException{
+		
+		ArrayList<Integer> corners = new ArrayList<Integer>();
+		
+		ArrayList<Integer> others = new ArrayList<Integer>();
+		
+		
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[0].length; j++) {
+				if (board[i][j] != 'O' && board[i][j] != 'X') {
+					if ( (i == 0 && (j == 0 || j == board[0].length-1) || (i == board.length-1 && (j==0 || j==board[0].length-1)))  ) {
+						corners.add(i*board.length +j);
+					}
+					else {
+						others.add(i*board.length +j);
+					}
+				}
+			}
+		}
+		
+		Random rand = new Random();
+		
+		int choice = -1;
+		if (corners.size() != 0) {
+			choice = corners.get(rand.nextInt(corners.size()));
+		}
+		else if(others.size() != 0) {
+			choice = others.get(rand.nextInt(others.size()));
+		}
+		
+		if(choice != -1) {
+			play((int)(choice/board[0].length), choice % board.length, nextPlayer); 
+		}
 	}
 
 	/**
